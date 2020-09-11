@@ -9,9 +9,9 @@ const questionSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Email is required!']
     },
-    obs: String,
+    observations: String,
     date: {
-        type: Number,
+        type: Date,
         required: [true, 'Date is required!']
     }
 });
