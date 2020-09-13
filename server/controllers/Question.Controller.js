@@ -7,7 +7,7 @@ const dbCode = 500;
 const requestPerPage = 20;
 
 function returnMessage(err) {
-  var object = "";
+  let object = "";
   Object.keys(err.errors).map((key, position) => {
     object +=
       err.errors[key].message.replace("!", "") +
@@ -19,13 +19,13 @@ function returnMessage(err) {
 module.exports = {
   getQuestions: async (req, res) => {
     try {
-      var query = {};
+      let query = {};
 
       if (req.query.id) {
         query._id = req.query.id;
       }
 
-      var filter = {
+      let filter = {
         limit: requestPerPage,
         skip: requestPerPage * req.query.page - requestPerPage,
         sort: {
@@ -39,7 +39,6 @@ module.exports = {
     }
   },
   insertQuestion: async (req, res) => {
-    console.log("insertQuestion");
     const newQuestion = new Question(req.body);
     const today = new Date();
     const tomorrow = new Date(today);
