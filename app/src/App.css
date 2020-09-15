@@ -1,13 +1,24 @@
 body {
-  background-color: #bdbdbd;
+  background-color: #ffffff;
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 
 .container{
     background-color: #005a8550;
-    border-radius: 2%;
+    border-radius: 5px;
     margin: 3% auto;
     padding: 2%;
+}
+
+.list-container{
+  width: 80% !important;
+  height: 100vh;
+  margin: auto !important;
+}
+
+.grid-item {
+  background-color: #005a8550;
+    padding: 1%;
 }
 
 .list-controls {
@@ -19,12 +30,52 @@ body {
 .list{
     overflow: auto;
     padding: 0;
-    height: 70vh;
+    height: 60vh;
     padding: 0;
 }
 
 .control-btn, .control-btn span{
     color: #007ab5;
+    
+}
+
+.btn-icon {
+  margin-right: 15px;
+}
+
+.new-question-btn {
+  margin-top: 4% !important;
+  background-color: #004262 !important;
+  color: #ffffff !important;
+  padding: 1% 5% !important;
+  font-size: 1em !important;
+}
+
+.btn-back-icon{
+  position: absolute !important;
+  margin-top: 3% !important;
+  margin-left: 3% !important;
+}
+
+/* questions */
+.form-questions {
+  width: 80vh;
+  padding: 10vh;
+  background-color: #005a8550;
+  border-radius: 5px;
+}
+
+.questions-input {
+  width: 100%;
+}
+
+.questions-btn {
+  float: right;
+  
+}
+
+.question-grid {
+  height: 100vh !important;
 }
 
 
@@ -46,4 +97,42 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #004262;
+}
+
+@media only screen and (max-width: 1024px) {
+  .questions-background {
+    background-color: #005a8550;
+  }
+
+  .form-questions {
+    background-color: transparent;
+  }
+
+  .list-container {
+    width: 100% !important;
+    height: 100%;
+  }
+  .container{
+    background-color: #005a8550;
+    border-radius: 0;
+    margin: 0 auto;
+    padding: 3% 0% !important;
+  }
+
+  .list{
+    height: 80vh;
+  } 
+
+  .new-question-btn {
+    background-color: #004262 !important;
+    color: #ffffff !important;
+    padding: 1.5% 8% !important;
+    font-size: 1rem !important;
+  }
+  .form-questions {
+    width: 100vh;
+    padding: 10vh 5vh;
+    margin: 0;
+  }
+
 }
