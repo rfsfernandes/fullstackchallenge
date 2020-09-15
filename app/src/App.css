@@ -1,4 +1,49 @@
-body{
-    background-color: #bdbdbd;
-    background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+body {
+  background-color: #bdbdbd;
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+}
+
+.container{
+    background-color: #005a8550;
+    border-radius: 2%;
+    margin: 3% auto;
+    padding: 2%;
+}
+
+.list-controls {
+    justify-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.list{
+    overflow: auto;
+    padding: 0;
+    height: 70vh;
+    padding: 0;
+}
+
+.control-btn, .control-btn span{
+    color: #007ab5;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #888;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #005a85;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #004262;
 }
