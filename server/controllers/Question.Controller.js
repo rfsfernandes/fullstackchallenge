@@ -18,6 +18,7 @@ function returnMessage(err) {
 
 module.exports = {
   getQuestions: async (req, res) => {
+    res.set({"Access-Control-Allow-Origin": "*"})
     try {
       let query = {};
 
@@ -33,7 +34,8 @@ module.exports = {
         },
       };
       const results = await Question.find(query, null, filter);
-      res.status(200).json({ questions: results, ...Response(200, "Success") });
+      const pageCount = await Question.countDocuments();
+      res.status(200).json({ questions: results, pageCount: (Math.ceil(pageCount / requestPerPage)), page: req.query.page, ...Response(200, "Success") });
     } catch (error) {
       res.status(dbCode).json(Response(dbCode, error));
     }
@@ -43,6 +45,7 @@ module.exports = {
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(new Date().getDate() + 1);
+    res.set({"Access-Control-Allow-Origin": "*"})
     if (!validator.validate(newQuestion.email)) {
       throw res.status(500).json(Response(500, "Invalid email!"));
     } else if (newQuestion.date.getTime() < tomorrow.getTime()) {
