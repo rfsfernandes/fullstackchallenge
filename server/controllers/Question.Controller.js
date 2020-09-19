@@ -42,8 +42,8 @@ module.exports = {
   insertQuestion: async (req, res) => {
     const newQuestion = new Question(req.body);
     const today = new Date();
-    const afterTomorrow = new Date(today);
-    afterTomorrow.setDate(new Date().getDate() + 2);
+    const afterTomorrow = new Date();
+    afterTomorrow.setDate(today.getDate() + 1);
     afterTomorrow.setHours(0);
     afterTomorrow.setMinutes(0);
     afterTomorrow.setMilliseconds(0);
