@@ -18,6 +18,11 @@ function returnMessage(err) {
 
 module.exports = {
   getQuestions: async (req, res) => {
+
+    if(req.query.page === "") {
+      req.query.page = 1;
+    }
+
     try {
       let query = {};
 
