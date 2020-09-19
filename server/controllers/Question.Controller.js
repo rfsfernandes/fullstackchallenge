@@ -44,7 +44,7 @@ module.exports = {
     const newQuestion = new Question(req.body);
     const today = new Date();
     const tomorrow = new Date(today);
-    tomorrow.setDate(new Date().getDate() + 1);
+    tomorrow.setDate(new Date().getDate() + 2);
     res.set({"Access-Control-Allow-Origin": "*"})
     if (!validator.validate(newQuestion.email)) {
       throw res.status(500).json(Response(500, "Invalid email!"));
@@ -60,6 +60,7 @@ module.exports = {
     }
   },
   generateData: async (req, res) => {
+    res.set({"Access-Control-Allow-Origin": "*"})
     try {
       const questionsArray = [];
       for (let index = 0; index < 100; index++) {

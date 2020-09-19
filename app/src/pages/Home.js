@@ -1,21 +1,42 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import Pagination from "../components/Home.Pagination";
+import CustomPagination from "../components/Home.Pagination";
 import QuestionList from "../components/Home.List";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import LiveHelpRoundedIcon from "@material-ui/icons/LiveHelpRounded";
 // import LinearProgress from "@material-ui/core/LinearProgress";
+import api from "../services/api";
+import { connect } from "react-redux";
+import * as QuestionActions from "../store/actions";
 
-import "../App.css";
+let page = 1;
 
+const Home = ({ response, dispatch }) => {
+  const questionsRequest = async (page) => {
+    try {
+      const questionsList = await api.get("question", {
+        params: {
+          page: page,
+        },
+      });
 
-function Home() {
-  const page = 1;
+      dispatch(QuestionActions.getQuestions(questionsList.data));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  useEffect(() => {
+    questionsRequest(page);
+  }, [])
+
+  function handlePageClick(pageClicked) {
+    page = pageClicked;
+    questionsRequest(pageClicked);
+  }
 
   return (
-
     <div>
       {/* <div className="progress-wrapper">
         <LinearProgress color="secondary" className="progress" />
@@ -28,7 +49,11 @@ function Home() {
         className="list-container"
       >
         <Grid item xs={12} sm={12} className="grid-item grid-list">
-          <QuestionList page={page} />
+          {response !== undefined ? (
+            <QuestionList questionList={response} />
+          ) : (
+            ""
+          )}
         </Grid>
         <Divider />
         <Button href="/questions" className="new-question-btn">
@@ -36,8 +61,11 @@ function Home() {
           new question
         </Button>
         <Grid container justify={"center"}>
-          {105 !== 0 ? (
-            <Pagination itemCount={105} />
+          {response !== undefined ? (
+            <CustomPagination
+              pageNumber={response.pageCount}
+              pageCallback={handlePageClick}
+            />
           ) : (
             ""
           )}
@@ -45,6 +73,8 @@ function Home() {
       </Grid>
     </div>
   );
-}
+};
 
-export default Home;
+export default connect((state) => ({ response: state.questions.response }))(
+  Home
+);

@@ -1,33 +1,15 @@
 import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import ArrowLeftRoundedIcon from "@material-ui/icons/ArrowLeftRounded";
-import ArrowRightRoundedIcon from "@material-ui/icons/ArrowRightRounded";
-import Button from '@material-ui/core/Button'; 
-import "../App.css";
+import Pagination from '@material-ui/lab/Pagination';
 
-const buttonsArray = [];
 
-function generateButtons(itemCount) {
-  let numberOfButtons = Math.floor(itemCount / 20);
-  for (let index = 0; index < numberOfButtons; index++) {
-    buttonsArray.push(<Button className="control-btn">{index + 1}</Button>);
+
+function CustomPagination(props) {
+
+  const handleChange = (event, value) => {
+    props.pageCallback(value);
   }
-
-  return buttonsArray;
+  
+  return <Pagination count={props.pageNumber} shape="rounded" onChange={handleChange}/>;
 }
 
-function Pagination(props) {
-  return (
-    <div>
-      <IconButton>
-        <ArrowLeftRoundedIcon className="control-btn" />
-      </IconButton>
-      {generateButtons(props.itemCount)}
-      <IconButton>
-        <ArrowRightRoundedIcon className="control-btn" />
-      </IconButton>
-    </div>
-  );
-}
-
-export default Pagination;
+export default CustomPagination;
