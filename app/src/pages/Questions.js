@@ -1,13 +1,15 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import MyForm from "../components/Questions.form"
+import MyForm from "../components/MyForm"
 import KeyboardBackspaceRoundedIcon from '@material-ui/icons/KeyboardBackspaceRounded';
 import IconButton from "@material-ui/core/IconButton";
+import Grow from "@material-ui/core/Grow";
 import "../App.css";
 
 function Questions() {
   return (
-    <div className="questions-background">
+    <Grow in style={{ transformOrigin: "0 0 0" }} {...{ timeout: 500 }}>
+      <div className="questions-background">
       <IconButton className="btn-back-icon" href="/">
         <KeyboardBackspaceRoundedIcon  fontSize={"large"}/>
       </IconButton>
@@ -21,6 +23,8 @@ function Questions() {
         <MyForm />
       </Grid>
     </div>
+    </Grow>
+    
   );
 }
 

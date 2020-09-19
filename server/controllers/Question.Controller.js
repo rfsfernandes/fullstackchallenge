@@ -18,7 +18,6 @@ function returnMessage(err) {
 
 module.exports = {
   getQuestions: async (req, res) => {
-    res.set({"Access-Control-Allow-Origin": "*"})
     try {
       let query = {};
 
@@ -43,24 +42,26 @@ module.exports = {
   insertQuestion: async (req, res) => {
     const newQuestion = new Question(req.body);
     const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(new Date().getDate() + 2);
-    res.set({"Access-Control-Allow-Origin": "*"})
+    const afterTomorrow = new Date(today);
+    afterTomorrow.setDate(new Date().getDate() + 2);
+    afterTomorrow.setHours(0);
+    afterTomorrow.setMinutes(0);
+    afterTomorrow.setMilliseconds(0);
+    
     if (!validator.validate(newQuestion.email)) {
       throw res.status(500).json(Response(500, "Invalid email!"));
-    } else if (newQuestion.date.getTime() < tomorrow.getTime()) {
+    } if (newQuestion.date.getTime() < afterTomorrow.getTime()) {
       throw res.status(500).json(Response(500, "Invalid date!"));
     } else {
       try {
         const save = await newQuestion.save();
-        res.json({ question: save, ...Response(200, "Success") });
+        res.json({ question: save, ...Response(200, "Question successfully sent! Thank you!") });
       } catch (error) {
         res.status(dbCode).json(Response(dbCode, returnMessage(error)));
       }
     }
   },
   generateData: async (req, res) => {
-    res.set({"Access-Control-Allow-Origin": "*"})
     try {
       const questionsArray = [];
       for (let index = 0; index < 100; index++) {

@@ -3,13 +3,6 @@ body {
   background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
 }
 
-.container{
-    background-color: #005a8550;
-    border-radius: 5px;
-    margin: 3% auto;
-    padding: 2%;
-}
-
 .list-container{
   width: 80% !important;
   height: 100vh;
@@ -18,7 +11,8 @@ body {
 
 .grid-item {
   background-color: #005a8550;
-    padding: 1%;
+  padding: 1%;
+  border-radius: 5px;
 }
 
 .list-controls {

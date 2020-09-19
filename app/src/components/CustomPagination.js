@@ -9,7 +9,7 @@ function CustomPagination(props) {
     props.pageCallback(value);
   }
   
-  return <Pagination count={props.pageNumber} shape="rounded" onChange={handleChange}/>;
+  return <Pagination count={props.pageNumber !== undefined ? props.pageNumber : 0} shape="rounded" onChange={handleChange}/>;
 }
 
 export default CustomPagination;
