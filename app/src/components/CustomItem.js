@@ -13,7 +13,7 @@ function CustomItem(props) {
     rawdate.toLocaleDateString() + " " + rawdate.toLocaleTimeString();
 
   function handleClick() {
-    setOpen(!open);
+    setOpen((prevState) => !prevState);
   }
   return (
     <div>

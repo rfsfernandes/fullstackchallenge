@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import api from "../services/api";
+
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { connect } from "react-redux";
+import * as QuestionActions from "../store/actions";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -17,7 +19,7 @@ const FORM_INITIAL_STATE = {
   date: "",
 };
 
-function MyForm() {
+const MyForm = ({ response, dispatch }) => {
   const [formFields, setFormFields] = useState(FORM_INITIAL_STATE);
   const [errorName, setErrorName] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
@@ -85,17 +87,14 @@ function MyForm() {
   }
 
   const makeRequest = async () => {
-    const config = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    await api
-      .post("/question", formFields, config)
-      .then((response) => handleResponse(response.data))
-      .catch((error) => handleResponse(error.response.data));
+    QuestionActions.postQuestion(formFields, dispatch, handleResponse);
   };
+ 
+  useEffect(() => {
+    if (response.message) {
+      handleResponse(response);
+    }
+  }, [response])
 
   function handleResponse(data) {
     let severity = "";
@@ -125,7 +124,6 @@ function MyForm() {
     if (reason === "clickaway") {
       return;
     }
-
     setOpen(false);
   };
 
@@ -198,6 +196,8 @@ function MyForm() {
       </form>
     </div>
   );
-}
+};
 
-export default MyForm;
+export default connect((state) => ({ response: state.questions.response }))(
+  MyForm
+);

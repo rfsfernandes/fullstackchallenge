@@ -6,25 +6,15 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import LiveHelpRoundedIcon from "@material-ui/icons/LiveHelpRounded";
 import Grow from "@material-ui/core/Grow";
-import api from "../services/api";
 import { connect } from "react-redux";
 import * as QuestionActions from "../store/actions";
 
 let page = 1;
 
 const Home = ({ response, dispatch }) => {
-  const questionsRequest = async (page) => {
-    try {
-      const questionsList = await api.get("question", {
-        params: {
-          page: page,
-        },
-      });
 
-      dispatch(QuestionActions.getQuestions(questionsList.data));
-    } catch (err) {
-      console.log(err);
-    }
+  const questionsRequest = async (page) => {
+    QuestionActions.getQuestions(page, dispatch);
   };
 
   useEffect(() => {
